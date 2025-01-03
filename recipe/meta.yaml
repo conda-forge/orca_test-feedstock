@@ -11,20 +11,22 @@ source:
 
 build:
   noarch: python
-  number: 0
+  number: 1
   script: "{{ PYTHON }} -m pip install . --no-deps --ignore-installed --no-cache-dir -vvv "
 
 requirements:
   host:
     - pip
-    - python
+    - python {{ python_min }}
   run:
     - numpy >=1.0
     - orca >=1.3.0
     - pandas >=0.12
-    - python
+    - python >={{ python_min }}
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - orca_test
 
